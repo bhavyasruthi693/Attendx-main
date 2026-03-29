@@ -1,0 +1,65 @@
+services:
+  # Backend API Service - High Performance Production Setup
+  - type: web
+    name: attendx-backend
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SQLALCHEMY_POOL_SIZE
+        value: "3"
+      - key: SQLALCHEMY_MAX_OVERFLOW
+        value: "0"
+      - key: SQLALCHEMY_POOL_RECYCLE
+        value: "3600"
+      - key: SQLALCHEMY_POOL_PRE_PING
+        value: "true"
+      - key: SQLALCHEMY_POOL_TIMEOUT
+        value: "15"
+      - key: SQLALCHEMY_CONNECT_TIMEOUT
+        value: "15"
+      - key: LOG_LEVEL
+        value: "INFO"
+    autoDeploy: true
+    maxInstances: 2
+    minInstances: 1
+
+  # Frontend Static Site - CDN + Caching Optimized
+  - type: web
+    name: attendx-frontend
+    runtime: static
+    buildCommand: npm install --legacy-peer-deps && NODE_OPTIONS='--max-old-space-size=2048' npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://attendx-backend-6z2l.onrender.com
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Strict-Transport-Security
+        value: "max-age=31536000; includeSubDomains"
+      - path: /index.html
+        name: Cache-Control
+        value: "public, max-age=0, must-revalidate"
+      - path: /assets/*
+        name: Cache-Control
+        value: "public, max-age=31536000, immutable"
+      - path: /*.js
+        name: Cache-Control
+        value: "public, max-age=3600"
+      - path: /*.css
+        name: Cache-Control
+        value: "public, max-age=3600"
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+

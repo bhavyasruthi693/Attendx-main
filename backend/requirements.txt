@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+alembic
+psycopg2-binary
+python-dotenv
+pytest
+httpx
+pytest-asyncio
+black
+isort
+pymysql
+mysql-connector-python
+python-dotenv
+cryptography

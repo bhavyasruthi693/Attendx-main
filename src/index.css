@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+     :root {
+        --background: 222 47% 8%;
+        --foreground: 0 0% 100%;
+        --card: 222 41% 12%;
+        --card-foreground: 0 0% 100%;
+        --popover: 222 41% 12%;
+        --popover-foreground: 0 0% 100%;
+        --primary: 180 100% 50%;
+        --primary-foreground: 222 47% 8%;
+        --secondary: 222 30% 18%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 222 30% 20%;
+        --muted-foreground: 215 20% 65%;
+        --accent: 180 100% 50%;
+        --accent-foreground: 222 47% 8%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 222 30% 20%;
+        --input: 222 30% 18%;
+        --ring: 180 100% 50%;
+        --radius: 1rem;
+        /* Vision UI Custom Colors */
+        --vision-primary: 180 100% 50%;
+        --vision-primary-glow: 180 100% 70%;
+        --vision-info: 210 100% 60%;
+        --vision-success: 145 80% 50%;
+        --vision-warning: 38 100% 60%;
+        --vision-danger: 0 84% 60%;
+        /* Gradients */
+        --gradient-brand: linear-gradient(135deg, hsl(180 100% 50%) 0%, hsl(210 100% 50%) 100%);
+        --gradient-card: linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%);
+        --gradient-border: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+        --gradient-glow: radial-gradient(circle at center, hsl(180 100% 50% / 0.3) 0%, transparent 70%);
+        /* Glass Effects */
+        --glass-bg: rgba(6, 11, 40, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --glass-blur: 40px;
+        --sidebar-background: 222 47% 6%;
+        --sidebar-foreground: 0 0% 100%;
+        --sidebar-primary: 180 100% 50%;
+        --sidebar-primary-foreground: 222 47% 8%;
+        --sidebar-accent: 222 30% 18%;
+        --sidebar-accent-foreground: 0 0% 100%;
+        --sidebar-border: 222 30% 15%;
+        --sidebar-ring: 180 100% 50%;
+    }
+    .dark {
+        --background: 222 47% 8%;
+        --foreground: 0 0% 100%;
+        --card: 222 41% 12%;
+        --card-foreground: 0 0% 100%;
+        --popover: 222 41% 12%;
+        --popover-foreground: 0 0% 100%;
+        --primary: 180 100% 50%;
+        --primary-foreground: 222 47% 8%;
+        --secondary: 222 30% 18%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 222 30% 20%;
+        --muted-foreground: 215 20% 65%;
+        --accent: 180 100% 50%;
+        --accent-foreground: 222 47% 8%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 222 30% 20%;
+        --input: 222 30% 18%;
+        --ring: 180 100% 50%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    body {
+        @apply bg-background text-foreground antialiased;
+        background: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 5%) 100%);
+        min-height: 100vh;
+    }
+}
+
+@layer components {
+    .glass-card {
+        background: linear-gradient(135deg, rgba(13, 19, 57, 0.8) 0%, rgba(17, 28, 68, 0.8) 50%, rgba(13, 19, 57, 0.8) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.25rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .glass-card-hover {
+        @apply glass-card transition-all duration-300;
+    }
+    .glass-card-hover:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+    }
+    .gradient-text {
+        background: linear-gradient(135deg, hsl(180 100% 50%) 0%, hsl(210 100% 70%) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .icon-box {
+        @apply flex items-center justify-center rounded-xl;
+        background: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(180 100% 50%) 100%);
+        width: 45px;
+        height: 45px;
+    }
+    .icon-box-success {
+        background: linear-gradient(135deg, hsl(145 80% 40%) 0%, hsl(145 80% 50%) 100%);
+    }
+    .icon-box-warning {
+        background: linear-gradient(135deg, hsl(38 100% 50%) 0%, hsl(38 100% 60%) 100%);
+    }
+    .icon-box-primary {
+        background: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(180 100% 50%) 100%);
+    }
+    .glow-effect {
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+    }
+    .sidebar-item {
+        @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200;
+        color: hsl(215 20% 65%);
+    }
+    .sidebar-item:hover {
+        background: linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%);
+    }
+    .sidebar-item-active {
+        @apply sidebar-item;
+        background: linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%);
+        color: white;
+    }
+    .stat-positive {
+        color: hsl(145 80% 50%);
+    }
+    .stat-negative {
+        color: hsl(0 84% 60%);
+    }
+}
+
+@layer utilities {
+    .text-gradient {
+        @apply gradient-text;
+    }
+}
